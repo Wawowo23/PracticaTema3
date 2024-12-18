@@ -5,7 +5,8 @@ public class Productos {
     private String nombre;
     private float precio;
     private int cantidad;
-    private int id;
+    private String id;
+    private int productosRegistrados;
 
     // Constructor
 
@@ -14,6 +15,7 @@ public class Productos {
         this.precio = precio;
         this.cantidad = cantidad;
         this.id = generaId();
+        productosRegistrados++;
     }
 
     public Productos(Productos producto){
@@ -51,20 +53,23 @@ public class Productos {
         this.cantidad = cantidad;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     // Metodos
 
-    private int generaId () {
-        int random;
-        random = (int) ((Math.random() * 40000) + 10000);
-        return random ;
+    private String generaId () {
+        String codigo = "";
+        codigo += String.valueOf(productosRegistrados);
+        while (codigo.length() < 8) {
+            codigo = "0" + codigo;
+        }
+        return codigo;
     }
 
     public String pintaProducto () {
