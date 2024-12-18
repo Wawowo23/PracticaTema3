@@ -1,6 +1,6 @@
 package models;
 
-public class Productos {
+public class Producto {
     // Atributos
     private String nombre;
     private float precio;
@@ -10,7 +10,7 @@ public class Productos {
 
     // Constructor
 
-    public Productos(String nombre, float precio, int cantidad) {
+    public Producto(String nombre, float precio, int cantidad) {
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
@@ -18,7 +18,7 @@ public class Productos {
         productosRegistrados++;
     }
 
-    public Productos(Productos producto){
+    public Producto(Producto producto){
         nombre = producto.nombre;
         precio = producto.precio;
         cantidad = producto.cantidad;
@@ -77,5 +77,9 @@ public class Productos {
                 "Nombre: " + nombre + "\n" +
                 "Precio: " + precio + "€" + "\n" +
                 "Cantidad restante: " + cantidad + "\n";
+    }
+
+    public String pintaProductoPedido() {
+        return "\t - " + nombre + "(" + precio + "E)\n";
     }
 }
