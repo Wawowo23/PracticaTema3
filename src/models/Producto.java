@@ -72,6 +72,12 @@ public class Producto {
         return codigo;
     }
 
+    public boolean salidaProducto (int cantidad) {
+        if (cantidad > this.cantidad) return false;
+        this.cantidad -= cantidad;
+        return true;
+    }
+
     public String pintaProducto () {
         return "Id del producto: " + id + "\n" +
                 "Nombre: " + nombre + "\n" +

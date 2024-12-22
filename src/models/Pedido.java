@@ -145,8 +145,9 @@ public class Pedido {
         return salida;
     }
 
-    public boolean insertaProducto(Producto producto) {
+    public boolean insertaProducto(Producto producto, int cantidad) {
         if (pedidoLleno()) return false;
+        if (!producto.salidaProducto(cantidad)) return false;
         if (producto1 == null) {
                 producto1 = producto;
                 return true;
