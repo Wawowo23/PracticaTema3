@@ -30,6 +30,19 @@ public class Pedido {
         pedidosCreados++;
     }
 
+    // Constructor copia
+    public Pedido (Pedido pedido) {
+        this.id = pedido.id;
+        this.precioTotal = pedido.precioTotal;
+        this.estado = pedido.estado;
+        this.comentario = pedido.comentario;
+        this.fechaPedido = pedido.fechaPedido;
+        this.producto1 = pedido.producto1;
+        this.producto2 = pedido.producto2;
+        this.producto3 = pedido.producto3;
+        pedidosCreados++;
+    }
+
     // Getters y Setters
 
     public String getId() {
@@ -141,7 +154,7 @@ public class Pedido {
         salida += ((producto1 == null)? "": producto1.pintaProductoPedido());
         salida += ((producto2 == null)? "": producto2.pintaProductoPedido());
         salida += ((producto3 == null)? "": producto3.pintaProductoPedido());
-        salida += "Total del pedido: " + precioTotal + "E";
+        salida += "Total del pedido: " + calculaPrecioPedido() + "E";
         return salida;
     }
 
@@ -166,6 +179,18 @@ public class Pedido {
         return false;
     }
 
+    public void cambiaEstado (int op) {
+        if (op == 1 ) estado = "Recibido";
+        if (op == 2) estado = "En preparación";
+        if (op == 3) estado = "Retrasado";
+        if (op == 4) estado = "Cancelado";
+        if (op == 5) estado = "Enviado";
+    }
+
+    public void insertaComentario (String comentario) {
+        this.comentario = comentario;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" +
@@ -179,4 +204,5 @@ public class Pedido {
                 ", producto3=" + producto3 +
                 '}';
     }
+
 }

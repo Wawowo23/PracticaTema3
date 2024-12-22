@@ -132,10 +132,10 @@ public class Cliente {
     public boolean insertaPedidos (Pedido pedido) {
         if (pedidosCompletos()) return false;
         if (pedido1 == null) {
-            pedido1 = pedido;
+            pedido1 = new Pedido(pedido);
             return true;
         }
-        pedido2 = pedido;
+        pedido2 = new Pedido(pedido);
         return true;
     }
 

@@ -12,11 +12,10 @@ public class mainPrueba {
 
         Cliente c1 = new Cliente("Miguel Angel","amai@gmail.com","1234","aqui",688569596,"Torredonjimeno","Jaen");
 
-        System.out.println("Inserta tu correo:");
-        String correo = s.nextLine();
-        System.out.println("Inserta tu clave:");
-        String clave = s.nextLine();
+        Pedido temp = new Pedido();
+        temp.insertaProducto(Catalogo.libroAkira,12);
+        c1.insertaPedidos(temp);
 
-        System.out.println((c1.login(clave,correo)) ? "Sesión iniciada correctamente":"Error al iniciar sesion");
+        System.out.println(c1.pintaPedidoConCliente());
     }
 }
