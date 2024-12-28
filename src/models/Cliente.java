@@ -120,7 +120,7 @@ public class Cliente {
 
     // Metodos
 
-    public boolean login(String clave, String usuario) {
+    public boolean login(String usuario, String clave) {
         return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
