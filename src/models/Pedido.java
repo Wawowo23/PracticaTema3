@@ -21,7 +21,7 @@ public class Pedido {
     public Pedido() {
         id = generaIdPedido();
         precioTotal = calculaPrecioPedido();
-        estado = "";
+        estado = "Preparando";
         comentario = "";
         fechaPedido = LocalDate.now();
         producto1 = null;
@@ -180,11 +180,24 @@ public class Pedido {
     }
 
     public void cambiaEstado (int op) {
-        if (op == 1 ) estado = "Recibido";
-        if (op == 2) estado = "En preparación";
-        if (op == 3) estado = "Retrasado";
-        if (op == 4) estado = "Cancelado";
-        if (op == 5) estado = "Enviado";
+        switch (op) {
+            case 1:
+               estado = "Recibido";
+               break;
+            case 2:
+                estado = "En preparación";
+                break;
+            case 3:
+                estado = "Retrasado";
+                break;
+            case 4:
+                estado = "Cancelado";
+                break;
+            case 5:
+                estado = "Enviado";
+                break;
+        }
+
     }
 
     public void insertaComentario (String comentario) {

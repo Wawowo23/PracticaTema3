@@ -75,15 +75,17 @@ public class Tienda {
     // Metodos
 
     public void mock () {
-        cliente1 = new Cliente()
+        cliente1 = new Cliente("Carlos Cañada","Carlos","amai@gmail.com","1234","Calle hola",122344556,"Martos","Jaen");
+        cliente2 = new Cliente("Lara Camara","Lara","lara@gmail.com","0405","Calle La Cerca",4557656,"Torredonjimeno","Jaen");
+        trabajador1 = new Trabajador("Rosendo","1234","123454","rosendo@gmail.com");
     }
 
     public String login (String usuario, String clave) {
-        if (cliente1.login(usuario,clave)) return "cliente";
-        if (cliente2.login(usuario,clave)) return "cliente";
-        if (trabajador1.login(usuario,clave)) return "trabajador";
-        if (trabajador2.login(usuario,clave)) return "trabajador";
-        if (trabajador3.login(usuario,clave)) return "trabajador";
+        if (cliente1 != null && cliente1.login(usuario,clave)) return "cliente";
+        if (cliente2 != null && cliente2.login(usuario,clave)) return "cliente";
+        if (trabajador1 != null && trabajador1.login(usuario,clave)) return "trabajador";
+        if (trabajador2 != null && trabajador2.login(usuario,clave)) return "trabajador";
+        if (trabajador3 != null && trabajador3.login(usuario,clave)) return "trabajador";
         if (admin.login(usuario, clave)) return "admin";
         return "error";
     }
@@ -106,5 +108,17 @@ public class Tienda {
     public Admin loginAdmin (String usuario, String clave) {
         if (login(usuario, clave).equals("admin")) return admin;
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Tienda{" +
+                "cliente1=" + cliente1 +
+                ", cliente2=" + cliente2 +
+                ", trabajador1=" + trabajador1 +
+                ", trabajador2=" + trabajador2 +
+                ", trabajador3=" + trabajador3 +
+                ", admin=" + admin +
+                '}';
     }
 }

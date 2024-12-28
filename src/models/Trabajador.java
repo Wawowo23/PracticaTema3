@@ -15,6 +15,19 @@ public class Trabajador {
         this.clave = clave;
         this.idTrabajador = idTrabajador;
         this.correo = correo;
+        pedido1 = null;
+        pedido2 = null;
+    }
+
+    //Constructor copia
+
+    public Trabajador (Trabajador trabajador) {
+        nombre = trabajador.nombre;
+        clave = trabajador.clave;
+        idTrabajador = trabajador.idTrabajador;
+        correo = trabajador.correo;
+        pedido1 = trabajador.pedido1;
+        pedido2 = trabajador.pedido2;
     }
 
     // Getters y Setters

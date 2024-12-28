@@ -3,6 +3,7 @@ package models;
 public class Cliente {
     // Atributos
     private String nombreCompleto;
+    private String usuario;
     private String correo;
     private String clave;
     private String direccion;
@@ -14,8 +15,9 @@ public class Cliente {
 
     // Constructor
 
-    public Cliente(String nombreCompleto, String correo, String clave, String direccion, int telefono, String localidad, String provincia) {
+    public Cliente(String nombreCompleto,String usuario, String correo, String clave, String direccion, int telefono, String localidad, String provincia) {
         this.nombreCompleto = nombreCompleto;
+        this.usuario = usuario;
         this.correo = correo;
         this.clave = clave;
         this.direccion = direccion;
@@ -30,6 +32,7 @@ public class Cliente {
 
     public Cliente (Cliente clienteCopiado) {
         nombreCompleto = clienteCopiado.nombreCompleto;
+        usuario = clienteCopiado.usuario;
         correo = clienteCopiado.correo;
         clave = clienteCopiado.clave;
         direccion = clienteCopiado.direccion;
@@ -117,8 +120,8 @@ public class Cliente {
 
     // Metodos
 
-    public boolean login(String clave, String correo) {
-        return this.correo.equals(correo) && this.clave.equals(clave);
+    public boolean login(String clave, String usuario) {
+        return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
     private boolean pedidosCompletos () {
