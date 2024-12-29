@@ -118,17 +118,25 @@ public class Cliente {
         this.pedido2 = pedido2;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     // Metodos
 
     public boolean login(String usuario, String clave) {
         return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
-    private boolean pedidosCompletos () {
+    public boolean pedidosCompletos () {
         return pedido2 != null && pedido1 != null;
     }
 
-    private boolean pedidosVacios () {
+    public boolean pedidosVacios () {
         return pedido2 == null && pedido1 == null;
     }
 
@@ -145,6 +153,7 @@ public class Cliente {
 
     public String pintaCliente() {
         return "Cliente: " + nombreCompleto + "\n" +
+                "Usuario: " + usuario + "\n" +
                 "Dirección: " + direccion +  "\n" +
                 "Localidad: " + localidad +  "\n" +
                 "Provincia: " + provincia +  "\n" +

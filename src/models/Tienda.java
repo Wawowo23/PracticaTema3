@@ -77,7 +77,7 @@ public class Tienda {
     public void mock () {
         cliente1 = new Cliente("Carlos Cañada","Carlos","amai@gmail.com","1234","Calle hola",122344556,"Martos","Jaen");
         cliente2 = new Cliente("Lara Camara","Lara","lara@gmail.com","0405","Calle La Cerca",4557656,"Torredonjimeno","Jaen");
-        trabajador1 = new Trabajador("Rosendo","1234","123454","rosendo@gmail.com");
+        trabajador1 = new Trabajador("Rosendo", "Rosendo","1234","123454","rosendo@gmail.com");
     }
 
     public String login (String usuario, String clave) {

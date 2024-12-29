@@ -85,6 +85,10 @@ public class Producto {
                 "Cantidad restante: " + cantidad + "\n";
     }
 
+    public String pintaProductoCatalogo () {
+        return nombre + ": " + precio + "E. " + ((cantidad < 1) ? "Agotado" : cantidad + "restantes");
+    }
+
     public String pintaProductoPedido() {
         return "\t - " + nombre + "(" + precio + "E)\n";
     }

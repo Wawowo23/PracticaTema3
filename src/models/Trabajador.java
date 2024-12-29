@@ -2,6 +2,7 @@ package models;
 
 public class Trabajador {
     private String nombre;
+    private String usuario;
     private String clave;
     private String idTrabajador;
     private String correo;
@@ -10,8 +11,9 @@ public class Trabajador {
 
     // Constructor
 
-    public Trabajador(String nombre, String clave, String idTrabajador, String correo) {
+    public Trabajador(String nombre, String usuario, String clave, String idTrabajador, String correo) {
         this.nombre = nombre;
+        this.usuario = usuario;
         this.clave = clave;
         this.idTrabajador = idTrabajador;
         this.correo = correo;
@@ -23,6 +25,7 @@ public class Trabajador {
 
     public Trabajador (Trabajador trabajador) {
         nombre = trabajador.nombre;
+        usuario = trabajador.usuario;
         clave = trabajador.clave;
         idTrabajador = trabajador.idTrabajador;
         correo = trabajador.correo;
@@ -66,8 +69,8 @@ public class Trabajador {
 
     // Metodos
 
-    public boolean login (String correo, String clave) {
-        return this.correo.equals(correo) && this.clave.equals(clave);
+    public boolean login (String usuario, String clave) {
+        return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
     private boolean pedidosCompletos () {
