@@ -20,7 +20,7 @@ public class Pedido {
 
     public Pedido() {
         id = generaIdPedido();
-        precioTotal = calculaPrecioPedido();
+        precioTotal = 0;
         estado = "Preparando";
         comentario = "";
         fechaPedido = LocalDate.now();
@@ -133,13 +133,7 @@ public class Pedido {
         return salida;
     }
 
-    private float calculaPrecioPedido() {
-        float precioFinal = 0;
-        precioFinal += ((producto1 == null) ? 0:producto1.getPrecio());
-        precioFinal += ((producto2 == null) ? 0:producto2.getPrecio());
-        precioFinal += ((producto3 == null) ? 0:producto3.getPrecio());
-        return precioFinal;
-    }
+
 
     private String calculaFechaEstimada() {
         String fechaEstimada = String.valueOf(LocalDate.now().plusDays(5));
@@ -154,7 +148,7 @@ public class Pedido {
         salida += ((producto1 == null)? "": producto1.pintaProductoPedido());
         salida += ((producto2 == null)? "": producto2.pintaProductoPedido());
         salida += ((producto3 == null)? "": producto3.pintaProductoPedido());
-        salida += "Total del pedido: " + calculaPrecioPedido() + "E";
+        salida += "Total del pedido: " + precioTotal + "E\n";
         return salida;
     }
 
@@ -163,13 +157,16 @@ public class Pedido {
         if (!producto.salidaProducto(cantidad)) return false;
         if (producto1 == null) {
                 producto1 = producto;
+                precioTotal += (producto1.getPrecio() * cantidad);
                 return true;
         }
         if (producto2 == null) {
             producto2 = producto;
+            precioTotal += (producto2.getPrecio() * cantidad);
             return true;
         }
         producto3 = producto;
+        precioTotal += (producto3.getPrecio() * cantidad);
         return true;
 
     }

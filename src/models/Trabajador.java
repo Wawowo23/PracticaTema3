@@ -73,12 +73,19 @@ public class Trabajador {
         return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
+    public int numeroPedidos () {
+        int salida = 0;
+        if (pedido1 != null) salida++;
+        if (pedido2 != null) salida++;
+        return salida;
+    }
+
     private boolean pedidosCompletos () {
-        return pedido2 != null && pedido1 != null;
+        return numeroPedidos() == 2;
     }
 
     private boolean pedidosVacios () {
-        return pedido2 == null && pedido1 == null;
+        return numeroPedidos() == 0;
     }
 
     public boolean insertaPedido (Pedido pedido) {

@@ -2,7 +2,8 @@ package models;
 
 public class Cliente {
     // Atributos
-    private String nombreCompleto;
+    private String nombre;
+    private String apellidos;
     private String usuario;
     private String correo;
     private String clave;
@@ -15,8 +16,9 @@ public class Cliente {
 
     // Constructor
 
-    public Cliente(String nombreCompleto,String usuario, String correo, String clave, String direccion, int telefono, String localidad, String provincia) {
-        this.nombreCompleto = nombreCompleto;
+    public Cliente(String nombre,String apellidos,String usuario, String correo, String clave, String direccion, int telefono, String localidad, String provincia) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
         this.usuario = usuario;
         this.correo = correo;
         this.clave = clave;
@@ -31,7 +33,8 @@ public class Cliente {
     // Constructor copia
 
     public Cliente (Cliente clienteCopiado) {
-        nombreCompleto = clienteCopiado.nombreCompleto;
+        nombre = clienteCopiado.nombre;
+        apellidos = clienteCopiado.apellidos;
         usuario = clienteCopiado.usuario;
         correo = clienteCopiado.correo;
         clave = clienteCopiado.clave;
@@ -46,12 +49,20 @@ public class Cliente {
     // Getters y Setters
 
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getCorreo() {
@@ -152,7 +163,7 @@ public class Cliente {
 
 
     public String pintaCliente() {
-        return "Cliente: " + nombreCompleto + "\n" +
+        return "Cliente: " + nombre + " " + apellidos + "\n" +
                 "Usuario: " + usuario + "\n" +
                 "Dirección: " + direccion +  "\n" +
                 "Localidad: " + localidad +  "\n" +

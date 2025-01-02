@@ -75,8 +75,8 @@ public class Tienda {
     // Metodos
 
     public void mock () {
-        cliente1 = new Cliente("Carlos Cañada","Carlos","amai@gmail.com","1234","Calle hola",122344556,"Martos","Jaen");
-        cliente2 = new Cliente("Lara Camara","Lara","lara@gmail.com","0405","Calle La Cerca",4557656,"Torredonjimeno","Jaen");
+        cliente1 = new Cliente("Carlos","Cañada","Carlos","amai@gmail.com","1234","Calle hola",122344556,"Martos","Jaen");
+        //cliente2 = new Cliente("Lara","Camara","Lara","lara@gmail.com","0405","Calle La Cerca",4557656,"Torredonjimeno","Jaen");
         trabajador1 = new Trabajador("Rosendo", "Rosendo","1234","123454","rosendo@gmail.com");
     }
 
@@ -95,6 +95,24 @@ public class Tienda {
         if (cliente1.login(usuario,clave)) return cliente1;
         if (cliente2.login(usuario,clave)) return cliente2;
         return null;
+    }
+
+    public boolean registroCliente (Cliente clienteRegistrado) {
+        if (cliente1 == null) {
+            cliente1 = new Cliente(clienteRegistrado);
+            return true;
+        }
+        if (cliente2 == null) {
+            cliente2 = new Cliente(clienteRegistrado);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean registraPedido (Pedido pedido) {
+     if (admin.pedidosCompletos()) return false;
+     admin.registraPedido(pedido);
+     return true;
     }
 
     public Trabajador loginTrabajador (String usuario, String clave) {
