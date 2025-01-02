@@ -15,5 +15,38 @@
 ########   ##  ######   ## ## ## ##     ## ######   ## ## ##  ##  ##     ## ##     ##    ##     ##    ######   ######   ########  ## ## ## ##     ## ## ## ##  ######  ######### ##     ## ########  
 ##     ##  ##  ##       ##  ####  ##   ##  ##       ##  ####  ##  ##     ## ##     ##    #########    ##       ##       ##   ##   ##  #### ######### ##  ####       ## ##     ## ##     ## ##        
 ##     ##  ##  ##       ##   ###   ## ##   ##       ##   ###  ##  ##     ## ##     ##    ##     ##    ##       ##       ##    ##  ##   ### ##     ## ##   ### ##    ## ##     ## ##     ## ##        
-########  #### ######## ##    ##    ###    ######## ##    ## #### ########   #######     ##     ##    ##       ######## ##     ## ##    ## ##     ## ##    ##  ######  ##     ##  #######  ##       
+########  #### ######## ##    ##    ###    ######## ##    ## #### ########   #######     ##     ##    ##       ######## ##     ## ##    ## ##     ## ##    ##  ######  ##     ##  #######  ##   
+
+public static void menuTrabajador(){
+
+        System.out.printf("""
+                                   FERNANSHOP
+                ==================================================
+                = Bienvenido %f. Tienes %f pedidos que gestionar =
+                ==================================================
+                1. Consultar los pedidos que tengo asignados
+                2. Modificar el estado de un pedido
+                3. Consultar el catálogo de productos
+                4. Modificar un producto del catálogo
+                5. Ver mi perfil
+                6. Modificar mis datos personales
+                7. Cerrar sesión
+                Introduzca la opción a realizar:\s""");
+    }
+
+    public static void menuAdministrador(){
+        System.out.printf("""
+                                   FERNANSHOP
+                ==================================================
+                = Bienvenido %f. Tienes %f pedido por asignar    =
+                ==================================================
+                1. Asignar un pedido a un trabajador
+                2. Modificar el estado de un pedido
+                3. Dar de alta un trabajador
+                4. Ver todos los pedidos
+                5. Ver todos los clientes
+                6. Ver todos los trabajadores
+                7. Cerrar sesión
+                Introduzca la opción a realizar:\s""");
+    }
                                                                                                                                                                                  
