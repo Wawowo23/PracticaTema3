@@ -74,6 +74,7 @@ public class main {
                                             } while (!quiereSeguir.equalsIgnoreCase("n") && !pedidoAgregado.pedidoLleno());
                                             clienteTemporal.insertaPedidos(pedidoAgregado);
                                             tienda.registraPedido(pedidoAgregado);
+                                            tienda.asignacionAutomatica(pedidoAgregado);
                                             Utils.pulsaParaContinuar();
                                         }
                                         break;
@@ -136,6 +137,29 @@ public class main {
                                 Menus.menuAdministrador(adminTemporal);
                                 opMenusUsuarios = s.nextLine();
                                 switch (opMenusUsuarios) {
+                                    case "1":
+                                        break;
+                                    case "2":
+                                        System.out.println(adminTemporal.pintaEstadosPedidos());
+                                        System.out.print("Introduce el id del pedido que quieres modificar: ");
+                                        String idTemp = s.nextLine();
+                                        int estadoNuevo = Menus.seleccionaEstado(idTemp);
+                                        adminTemporal.cambiaEstadoPedido(estadoNuevo,idTemp);
+                                        break;
+                                    case "3":
+                                        break;
+                                    case "4":
+                                        break;
+                                    case "5":
+                                        break;
+                                    case "6":
+                                        break;
+                                    case "7":
+                                        System.out.println("Cerrando sesión...");
+                                        break;
+                                    default:
+                                        System.out.println("Opción introducida incorrecta");
+                                        break;
 
                                 }
                             } while (!opMenusUsuarios.equals("7"));

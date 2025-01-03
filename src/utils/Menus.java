@@ -158,4 +158,23 @@ public class Menus {
             default -> null;
         };
     }
+
+    public static int seleccionaEstado (String id) {
+        var s = new Scanner(System.in);
+        int opcion;
+        System.out.printf("""
+                === Actualización del pedido %s ===
+                
+                Nuevo estado:
+                
+                1.- Recibido
+                2.- En preparación
+                3.- Retrasado
+                4.- Cancelado
+                5.- Enviado
+                Selecciona el nuevo estado:\s""",id);
+        opcion = Integer.parseInt(s.nextLine());
+        return opcion;
+    }
+
 }

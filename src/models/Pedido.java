@@ -152,6 +152,20 @@ public class Pedido {
         return salida;
     }
 
+    public String pintaPedidoParaTrabajadorAdmin() {
+        String salida = "";
+        salida += "==========  Pedido: " + id + "  ==========" + "\n";
+        salida += "Fecha del pedido: " + fechaPedido + "\n";
+        salida += "Fecha de entrega estimada: " + calculaFechaEstimada() + "\n";
+        salida += "Comentario del pedido: " + comentario + "\n";
+        salida += ((producto1 == null)? "": producto1.pintaProductoPedido());
+        salida += ((producto2 == null)? "": producto2.pintaProductoPedido());
+        salida += ((producto3 == null)? "": producto3.pintaProductoPedido());
+        salida += "Total del pedido: " + precioTotal + "E\n";
+        salida += "Estado del pedido: " + estado + "\n";
+        return salida;
+    }
+
     public boolean insertaProducto(Producto producto, int cantidad) {
         if (pedidoLleno()) return false;
         if (!producto.salidaProducto(cantidad)) return false;
@@ -171,10 +185,19 @@ public class Pedido {
 
     }
 
-    public boolean pedidoLleno () {
-        if (producto1 != null && producto2 != null && producto3 != null) return true;
-        return false;
+    public int cantidadProductos () {
+        int salida = 0;
+        if (producto1 != null) salida++;
+        if (producto2 != null) salida++;
+        if (producto3 != null) salida++;
+        return salida;
     }
+
+    public boolean pedidoLleno () {
+        return cantidadProductos() == 3;
+    }
+
+
 
     public void cambiaEstado (int op) {
         switch (op) {

@@ -189,4 +189,16 @@ public class Cliente {
         }
         return salida;
     }
+
+    /*public String pintaAsinacionPedido () {
+        String salida = "";
+        if (pedidosVacios()) return salida;
+        salida += ((pedido1 == null) ? ""
+                :pedido1.getId() + " - " + nombre + " " + apellidos + " (" + provincia + ")  - "
+                + pedido1.cantidadProductos() + " " + pedido1.getPrecioTotal() + "E" + "\n");
+        salida += ((pedido2 == null) ? ""
+                :pedido2.getId() + " - " + nombre + " " + apellidos + " (" + provincia + ")  - "
+                + pedido2.cantidadProductos() + " " + pedido2.getPrecioTotal() + "E" + "\n");
+        return salida;
+    }*/
 }

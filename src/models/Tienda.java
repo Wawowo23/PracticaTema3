@@ -128,6 +128,57 @@ public class Tienda {
         return null;
     }
 
+    private int numeroTrabajadores () {
+        int salida = 0;
+        if (trabajador1 != null) salida++;
+        if (trabajador2 != null) salida++;
+        if (trabajador3 != null) salida++;
+        return salida;
+    }
+
+    public boolean asignacionAutomatica (Pedido pedido) {
+        if (numeroTrabajadores() == 0) return false;
+        if (numeroTrabajadores() == 1) {
+            trabajador1.insertaPedido(pedido);
+            return true;
+        }
+        if (numeroTrabajadores() == 2) {
+            if (trabajador1.numeroPedidos() < trabajador2.numeroPedidos()) {
+                trabajador1.insertaPedido(pedido);
+                return true;
+            }
+            if (trabajador2.numeroPedidos() < trabajador1.numeroPedidos()) {
+                trabajador2.insertaPedido(pedido);
+                return true;
+            }
+            return false;
+        }
+        if (numeroTrabajadores() == 3) {
+            if (trabajador1.numeroPedidos() < trabajador2.numeroPedidos() && trabajador1.numeroPedidos() < trabajador3.numeroPedidos()) {
+                trabajador1.insertaPedido(pedido);
+                return true;
+            }
+            if (trabajador2.numeroPedidos() < trabajador1.numeroPedidos() && trabajador2.numeroPedidos() < trabajador3.numeroPedidos()) {
+                trabajador2.insertaPedido(pedido);
+                return true;
+            }
+            if (trabajador3.numeroPedidos() < trabajador2.numeroPedidos() && trabajador3.numeroPedidos() < trabajador1.numeroPedidos()) {
+                trabajador3.insertaPedido(pedido);
+                return true;
+            }
+            return false;
+        }
+        return false;
+
+    }
+
+    /*public String pintaAsinacionPedido () {
+        String salida = "";
+        if (!cliente1.pedidosVacios()) salida += cliente1.pintaAsinacionPedido();
+        if (!cliente2.pedidosVacios()) salida += cliente2.pintaAsinacionPedido();
+        return salida;
+    }*/
+
     @Override
     public String toString() {
         return "Tienda{" +

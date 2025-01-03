@@ -76,4 +76,21 @@ public class Admin {
     private boolean pedidosVacios () {
         return numeroPedidos() == 0;
     }
+
+    public String pintaEstadosPedidos () {
+        String salida = "";
+        if (pedido1 != null) salida += pedido1.pintaPedidoParaTrabajadorAdmin();
+        if (pedido2 != null) salida += pedido2.pintaPedidoParaTrabajadorAdmin();
+        if (pedido3 != null) salida += pedido3.pintaPedidoParaTrabajadorAdmin();
+        if (pedido4 != null) salida += pedido4.pintaPedidoParaTrabajadorAdmin();
+        return salida;
+    }
+
+    public void cambiaEstadoPedido (int op, String idPedido) {
+        if (pedido1 != null && idPedido.equals(pedido1.getId())) pedido1.cambiaEstado(op);
+        if (pedido2 != null && idPedido.equals(pedido2.getId())) pedido2.cambiaEstado(op);
+        if (pedido3 != null && idPedido.equals(pedido3.getId())) pedido3.cambiaEstado(op);
+        if (pedido4 != null && idPedido.equals(pedido4.getId())) pedido4.cambiaEstado(op);
+
+    }
 }
