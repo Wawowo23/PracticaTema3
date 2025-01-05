@@ -14,4 +14,17 @@ public class Utils {
         System.out.println("Pulse para continuar...");
         s.nextLine();
     }
+
+    public static void cerrarSesion () {
+        System.out.print("Cerrando sesión ");
+        for (int i = 3; i >= 0; i--) {
+            System.out.print(".");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+    }
 }

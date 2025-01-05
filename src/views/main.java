@@ -5,6 +5,7 @@ import models.*;
 import utils.Menus;
 import utils.Utils;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class main {
@@ -74,7 +75,7 @@ public class main {
                                             } while (!quiereSeguir.equalsIgnoreCase("n") && !pedidoAgregado.pedidoLleno());
                                             clienteTemporal.insertaPedidos(pedidoAgregado);
                                             tienda.registraPedido(pedidoAgregado);
-                                            tienda.asignacionAutomatica(pedidoAgregado);
+
                                             Utils.pulsaParaContinuar();
                                         }
                                         break;
@@ -90,14 +91,15 @@ public class main {
                                         Utils.pulsaParaContinuar();
                                         break;
                                     case "5":
-                                        String seguimos = "n";
-
                                             System.out.println("Estos son tus datos personales registrados: ");
                                             System.out.println(clienteTemporal.pintaCliente());
                                             System.out.print("Que dato personal quieres cambiar(nombre/dirección/teléfono...): ");
                                             String datoCambiado = s.nextLine();
                                             Menus.cambiaDato(clienteTemporal,datoCambiado);
 
+                                        break;
+                                    case "6":
+                                        Utils.cerrarSesion();
                                         break;
                                 }
                             } while (!opMenusUsuarios.equals("6"));
@@ -106,23 +108,52 @@ public class main {
                         case "trabajador":
                             Trabajador trabajadorTemporal = tienda.loginTrabajador(usuarioTemp,claveTemp);
                             do {
+                                Utils.limpiaPantalla();
                                 Menus.menuTrabajador(trabajadorTemporal);
                                 opMenusUsuarios = s.nextLine();
                                 switch (opMenusUsuarios) {
                                     case "1":
-
+                                        System.out.println("Bienvenido al apartado de visualización de pedidos");
+                                        System.out.println(trabajadorTemporal.pintaPedidosAsignados());
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "2":
+                                        System.out.println("Bienvenido al apartado de cambio de estados de los pedidos");
+                                        System.out.println(trabajadorTemporal.pintaPedidosAsignados());
+                                        if (trabajadorTemporal.numeroPedidos() != 0) {
+                                            System.out.print("Introduce el id del pedido que quieres modificar: ");
+                                            String idTemp = s.nextLine();
+                                            int estadoNuevo = Menus.seleccionaEstado(idTemp);
+                                            trabajadorTemporal.cambiaEstadoPedido(estadoNuevo,idTemp);
+                                        }
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "3":
+                                        System.out.println("Bienvenido al catálogo de nuestra tienda");
+                                        Catalogo.pintaCatalogo();
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "4":
+                                        System.out.println("Bienvenido al apartado de cambio de productos");
+                                        Menus.cambioProducto();
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "5":
+                                        System.out.println("Bienvenido al apartado de visualización del perfil");
+                                        System.out.println(trabajadorTemporal.pintaTrabajador());
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "6":
+                                        System.out.println("Bienvenido al apartado de cambio de datos personales");
+                                        System.out.println("Estos son tus datos personales");
+                                        System.out.println(trabajadorTemporal.pintaTrabajador());
+                                        System.out.print("Que dato personal quieres cambiar(nombre/dirección/teléfono...): ");
+                                        String datoCambiado = s.nextLine();
+                                        Menus.cambiaDatoTrabajador(trabajadorTemporal,datoCambiado);
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "7":
+                                        Utils.cerrarSesion();
                                         break;
                                     default:
                                         System.out.println("Opción no válida");
@@ -134,6 +165,7 @@ public class main {
                         case "admin":
                             Admin adminTemporal = tienda.loginAdmin(usuarioTemp,claveTemp);
                             do {
+                                Utils.limpiaPantalla();
                                 Menus.menuAdministrador(adminTemporal);
                                 opMenusUsuarios = s.nextLine();
                                 switch (opMenusUsuarios) {
@@ -147,15 +179,32 @@ public class main {
                                         adminTemporal.cambiaEstadoPedido(estadoNuevo,idTemp);
                                         break;
                                     case "3":
+                                        System.out.println("Bienvenido al apartado de registro de trabajadores");
+                                        Utils.pulsaParaContinuar();
+                                        if (tienda.trabajadoresLlenos()) System.out.println("No se puede dar de alta a más trabajadores");
+                                        else {
+                                            System.out.println(((tienda.registroTrabajador(Menus.registroTrabajador())) ?
+                                                    "El trabajador ha sido registrado correctamente"
+                                                    :"Ha habido un problema en el registro del trabajador"));
+                                        }
                                         break;
                                     case "4":
+                                        System.out.println("Bienvenido al apartado de visualización de pedidos");
+                                        System.out.println(tienda.pintaPedidosParaAdmin());
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "5":
+                                        System.out.println("Bienvenido al apartado de visualización de clientes");
+                                        System.out.println(tienda.pintaClientes());
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "6":
+                                        System.out.println("Bienvenido al apartado de visualización de trabajadores");
+                                        System.out.println(tienda.pintaTrabajadores());
+                                        Utils.pulsaParaContinuar();
                                         break;
                                     case "7":
-                                        System.out.println("Cerrando sesión...");
+                                        Utils.cerrarSesion();
                                         break;
                                     default:
                                         System.out.println("Opción introducida incorrecta");

@@ -77,7 +77,7 @@ public class Tienda {
     public void mock () {
         cliente1 = new Cliente("Carlos","Cañada","Carlos","amai@gmail.com","1234","Calle hola",122344556,"Martos","Jaen");
         //cliente2 = new Cliente("Lara","Camara","Lara","lara@gmail.com","0405","Calle La Cerca",4557656,"Torredonjimeno","Jaen");
-        trabajador1 = new Trabajador("Rosendo", "Rosendo","1234","123454","rosendo@gmail.com");
+        trabajador1 = new Trabajador("Rosendo","Martos","Rosendo","1234","rosendo@gmail.com","Calle amai",898989898);
     }
 
     public String login (String usuario, String clave) {
@@ -107,6 +107,24 @@ public class Tienda {
             return true;
         }
         return false;
+    }
+
+    public boolean registroTrabajador (Trabajador trabajadorRegistrado) {
+        if (trabajadoresLlenos()) return false;
+        if (trabajador1 == null) {
+            trabajador1 = new Trabajador(trabajadorRegistrado);
+            return true;
+        }
+        if (trabajador2 == null) {
+            trabajador2 = new Trabajador(trabajadorRegistrado);
+            return true;
+        }
+        trabajador3 = new Trabajador(trabajadorRegistrado);
+        return true;
+    }
+
+    public boolean trabajadoresLlenos () {
+        return trabajador1 != null && trabajador2 != null && trabajador3 != null;
     }
 
     public boolean registraPedido (Pedido pedido) {
@@ -178,6 +196,35 @@ public class Tienda {
         if (!cliente2.pedidosVacios()) salida += cliente2.pintaAsinacionPedido();
         return salida;
     }*/
+
+    public String pintaPedidosParaAdmin () {
+        String salida = "";
+        if (cliente1 != null && !cliente1.pedidosVacios()) salida += cliente1.pintaPedidoConCliente();
+        if (cliente2 != null && !cliente2.pedidosVacios()) salida += cliente2.pintaPedidoConCliente();
+        if (salida.equals("")) salida += "No hay pedidos registrados todavía";
+        return salida;
+    }
+
+    private boolean clientesVacios () {
+        return cliente1 == null && cliente2 == null;
+    }
+
+    public String pintaTrabajadores () {
+        String salida = "";
+        if (numeroTrabajadores() == 0) salida += "No hay trabajadores registrados todavía";
+        if (trabajador1 != null) salida += trabajador1.pintaTrabajador();
+        if (trabajador2 != null) salida += trabajador2.pintaTrabajador();
+        if (trabajador3 != null) salida += trabajador3.pintaTrabajador();
+        return salida;
+    }
+
+    public String pintaClientes () {
+        String salida = "";
+        if (clientesVacios()) salida += "No hay clientes registrados todavía";
+        if (cliente1 != null) salida += cliente1.pintaCliente();
+        if (cliente2 != null) salida += cliente2.pintaCliente();
+        return salida;
+    }
 
     @Override
     public String toString() {

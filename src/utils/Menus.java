@@ -65,6 +65,30 @@ public class Menus {
 
     }
 
+    public static Trabajador registroTrabajador () {
+        var s = new Scanner(System.in);
+        String usuario,clave,nombre,apellidos,correo,direccion;
+        int telefono;
+        System.out.print("Introduzca el usuario: ");
+        usuario = s.nextLine();
+        System.out.print("Introduzca la contraseña: ");
+        clave = s.nextLine();
+        System.out.print("Introduzca el nombre: ");
+        nombre = s.nextLine();
+        System.out.print("Introduzca los apellidos: ");
+        apellidos = s.nextLine();
+        System.out.print("Introduzca el correo electrónico: ");
+        correo = s.nextLine();
+        System.out.print("Introduzca la dirección: ");
+        direccion = s.nextLine();
+        do {
+            System.out.print("Introduzca el número de teléfono: ");
+            telefono = Integer.parseInt(s.nextLine());
+            if (telefono < 100000000 || telefono > 999999999) System.out.println("El número introducido no cumple con los requisitos establecidos");
+        } while (telefono < 100000000 || telefono > 999999999);
+        return new Trabajador(nombre,apellidos,usuario,clave,correo,direccion,telefono);
+    }
+
     public static void cambiaDato (Cliente clienteTemporal, String datoCambiado) {
         var s = new Scanner(System.in);
         switch (datoCambiado.toLowerCase()) {
@@ -98,6 +122,15 @@ public class Menus {
                 } while (telefonoNuevo < 100000000 || telefonoNuevo > 999999999);
                 clienteTemporal.setTelefono(telefonoNuevo);
 
+                break;
+            case "correo":
+                String correoNuevo;
+                do {
+                    System.out.print("Introduzca su nuevo correo: ");
+                    correoNuevo = s.nextLine();
+                    if (!correoNuevo.contains("@")) System.out.println("El correo que introduzca debe contener un @");
+                } while (!correoNuevo.contains("@"));
+                clienteTemporal.setCorreo(correoNuevo);
                 break;
             default:
                 System.out.print("Dato introducido incorrecto");
@@ -144,19 +177,62 @@ public class Menus {
         var s = new Scanner(System.in);
         int op;
         Catalogo.pintaCatalogo();
-        System.out.print("Introduce el pedido que quiere agregar: ");
-        op = Integer.parseInt(s.nextLine());
-        return switch (op) {
-            case 1 -> Catalogo.libroRecetas;
-            case 2 -> Catalogo.libroBricolaje;
-            case 3 -> Catalogo.libroInformatica;
-            case 4 -> Catalogo.libroHarryPotter;
-            case 5 -> Catalogo.libroGeronimoStilton;
-            case 6 -> Catalogo.libroSeniorAnillos;
-            case 7 -> Catalogo.libroCorazonNavidad;
-            case 8 -> Catalogo.libroAkira;
-            default -> null;
-        };
+        do {
+            System.out.print("Introduce el producto que quieres seleccionar: ");
+            op = Integer.parseInt(s.nextLine());
+            if (op < 1 || op > 8) System.out.println("El producto seleccionado no existe");
+            else {
+                return switch (op) {
+                    case 1 -> Catalogo.libroRecetas;
+                    case 2 -> Catalogo.libroBricolaje;
+                    case 3 -> Catalogo.libroInformatica;
+                    case 4 -> Catalogo.libroHarryPotter;
+                    case 5 -> Catalogo.libroGeronimoStilton;
+                    case 6 -> Catalogo.libroSeniorAnillos;
+                    case 7 -> Catalogo.libroCorazonNavidad;
+                    case 8 -> Catalogo.libroAkira;
+                    default -> null;
+                };
+            }
+
+        } while (op < 1 || op > 8);
+
+        return null;
+    }
+
+    public static void cambioProducto () {
+        var s = new Scanner(System.in);
+        Producto productoCambio = seleccionaProducto();
+        System.out.print("Introduce lo que quieres cambiar de este producto (nombre/precio/cantidad): ");
+        String opcion = s.nextLine();
+        switch (opcion.toLowerCase()) {
+            case "nombre":
+                System.out.print("Introduce el nuevo nombre para el producto: ");
+                productoCambio.setNombre(s.nextLine());
+                break;
+            case "precio":
+                float nuevoPrecio;
+                do {
+                    System.out.print("Introduce el nuevo precio para el producto: ");
+                    nuevoPrecio = Float.parseFloat(s.nextLine());
+                    if (nuevoPrecio < 0) System.out.println("No se puede cambiar el precio establecido al introducido");
+                } while (nuevoPrecio < 0);
+                productoCambio.setPrecio((nuevoPrecio));
+                break;
+            case "cantidad":
+                int cantidadNueva;
+                do {
+                    System.out.print("Introduce la nueva cantidad para el producto: ");
+                    cantidadNueva = Integer.parseInt(s.nextLine());
+                    if (cantidadNueva < 0) System.out.println("No se puede cambiar la cantidad a la introducida");
+                } while (cantidadNueva < 0);
+                productoCambio.setCantidad(cantidadNueva);
+                break;
+            default:
+                System.out.println("La opción que ha introducido no existe");
+                break;
+        }
+
     }
 
     public static int seleccionaEstado (String id) {
@@ -177,4 +253,45 @@ public class Menus {
         return opcion;
     }
 
+    public static void cambiaDatoTrabajador(Trabajador trabajadorTemporal, String datoCambiado) {
+        var s = new Scanner(System.in);
+        switch (datoCambiado.toLowerCase()) {
+            case "nombre":
+                System.out.print("Introduzca su nuevo nombre: ");
+                trabajadorTemporal.setNombre(s.nextLine());
+                break;
+            case "apellidos":
+                System.out.print("Introduzca sus nuevos apellidos: ");
+                trabajadorTemporal.setApellidos(s.nextLine());
+                break;
+            case "direccion":
+                System.out.print("Introduzca su nueva direccion: ");
+                trabajadorTemporal.setDireccion(s.nextLine());
+                break;
+            case "telefono":
+                int telefonoNuevo;
+                do {
+                    System.out.print("Introduzca su número de teléfono: ");
+                    telefonoNuevo = Integer.parseInt(s.nextLine());
+                    if (telefonoNuevo < 100000000 || telefonoNuevo > 999999999)
+                        System.out.println("El número introducido no cumple con los requisitos establecidos");
+                } while (telefonoNuevo < 100000000 || telefonoNuevo > 999999999);
+                trabajadorTemporal.setTelefono(telefonoNuevo);
+                break;
+            case "correo":
+                String correoNuevo;
+                do {
+                    System.out.print("Introduzca su nuevo correo: ");
+                    correoNuevo = s.nextLine();
+                    if (!correoNuevo.contains("@")) System.out.println("El correo que introduzca debe contener un @");
+                } while (!correoNuevo.contains("@"));
+                trabajadorTemporal.setCorreo(correoNuevo);
+                break;
+            default:
+                System.out.print("Dato introducido incorrecto");
+                break;
+
+
+        }
+    }
 }
