@@ -13,6 +13,7 @@ public class Pedido {
     private Producto producto2;
     private Producto producto3;
 
+    // Atributo de la clase
     private static int pedidosCreados = 0;
 
     //Constructor
@@ -119,9 +120,12 @@ public class Pedido {
 
     // Metodos
 
+    // Metodo que genera automáticamente el id de un pedido
     private String generaIdPedido(){
         String salida = "";
         int codigo = 0;
+        // Metemos a este código datos como el mes y el día de realización del pedido
+        // y el número de pedido registrado que es
         codigo +=  LocalDate.now().getMonthValue();
         codigo += getPedidosCreados() * 100;
         codigo += LocalDate.now().getDayOfYear() * 10000;
@@ -133,18 +137,19 @@ public class Pedido {
         return salida;
     }
 
-
-
+    // Metodo que calcula la fecha estimada de llegada de un pedido
     private String calculaFechaEstimada() {
-        String fechaEstimada = String.valueOf(LocalDate.now().plusDays(5));
-        return fechaEstimada;
+        // A la fecha de realización del pedido le sumamos 5 días
+        return String.valueOf(fechaPedido.plusDays(5));
     }
 
+    // Metodo que pinta los datos de un pedido necesarios para el cliente
     public String pintaPedidoParaCliente() {
         String salida = "";
         salida += "Fecha del pedido: " + fechaPedido + "\n";
         salida += "Fecha de entrega estimada: " + calculaFechaEstimada() + "\n";
         salida += "Comentario del pedido: " + comentario + "\n";
+        // Aseguramos los productos que tiene un pedido
         salida += ((producto1 == null)? "": producto1.pintaProductoPedido());
         salida += ((producto2 == null)? "": producto2.pintaProductoPedido());
         salida += ((producto3 == null)? "": producto3.pintaProductoPedido());
@@ -152,12 +157,14 @@ public class Pedido {
         return salida;
     }
 
+    // Metodo que pinta los datos de un pedido necesarios para los trabajadores y el admin
     public String pintaPedidoParaTrabajadorAdmin() {
         String salida = "";
         salida += "==========  Pedido: " + id + "  ==========" + "\n";
         salida += "Fecha del pedido: " + fechaPedido + "\n";
         salida += "Fecha de entrega estimada: " + calculaFechaEstimada() + "\n";
         salida += "Comentario del pedido: " + comentario + "\n";
+        // Aseguramos los productos que tiene un pedido
         salida += ((producto1 == null)? "": producto1.pintaProductoPedido());
         salida += ((producto2 == null)? "": producto2.pintaProductoPedido());
         salida += ((producto3 == null)? "": producto3.pintaProductoPedido());
@@ -166,11 +173,16 @@ public class Pedido {
         return salida;
     }
 
+    // Metodo que mete productos ya seleccionados en un pedido
     public boolean insertaProducto(Producto producto, int cantidad) {
+        // Aseguramos que el pedido no esté lleno ya
         if (pedidoLleno()) return false;
+        // Aseguramos que la cantidad ingresada no es superior a la que hay de stock
         if (!producto.salidaProducto(cantidad)) return false;
+        // Comprobamos cual de los productos del pedido está en null para insertar el producto
         if (producto1 == null) {
                 producto1 = producto;
+                // Calculamos el precio del pedido
                 precioTotal += (producto1.getPrecio() * cantidad);
                 return true;
         }
@@ -185,6 +197,7 @@ public class Pedido {
 
     }
 
+    // Metodo para comprobar cuantos productos tiene un pedido
     public int cantidadProductos () {
         int salida = 0;
         if (producto1 != null) salida++;
@@ -193,12 +206,12 @@ public class Pedido {
         return salida;
     }
 
+    // Metodo para comprobar si el pedido ya está lleno
     public boolean pedidoLleno () {
         return cantidadProductos() == 3;
     }
 
-
-
+    // Metodo que cambia el estado de un pedido en base a una opción ya introducida
     public void cambiaEstado (int op) {
         switch (op) {
             case 1:
@@ -220,15 +233,18 @@ public class Pedido {
 
     }
 
-    public void cambiaFecha(LocalDate fechaNueva) {
+    // Metodo que cambia la fecha estimada de entrega de un pedido
+    public void cambiaFechaEstimada(LocalDate fechaNueva) {
         setFechaPedido(fechaNueva.minusDays(5));
     }
 
+    // Metodo que utilizan los trabajadores y el admin para insertar un comentario en un pedido
     public void insertaComentario (String comentario) {
         this.comentario = comentario;
     }
 
-    public String pintaSeleccionado () {
+    // Metodo que pinta un pedido para el menú de asignación de pedidos
+    public String pintaSeleccionadoAsignacion() {
         return id + " - " + cantidadProductos() + " producto - " + precioTotal + "E";
     }
 
@@ -245,6 +261,4 @@ public class Pedido {
                 ", producto3=" + producto3 +
                 '}';
     }
-
-
 }

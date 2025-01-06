@@ -137,20 +137,25 @@ public class Cliente {
         this.usuario = usuario;
     }
 
+
     // Metodos
 
+    // Metodo que comprueba si el usuario y contraseña introducidos corresponden a los del cliente
     public boolean login(String usuario, String clave) {
         return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
+    // Metodo que comprueba si un cliente ya ha realizado todos sus pedidos
     public boolean pedidosCompletos () {
         return pedido2 != null && pedido1 != null;
     }
 
+    // Metodo que comprueba si un cliente no ha realizado ningún pedido
     public boolean pedidosVacios () {
         return pedido2 == null && pedido1 == null;
     }
 
+    // Metodo por el cual un cliente realiza un pedido
     public boolean insertaPedidos (Pedido pedido) {
         if (pedidosCompletos()) return false;
         if (pedido1 == null) {
@@ -162,6 +167,7 @@ public class Cliente {
     }
 
 
+    // Metodo que pinta los datos de un cliente
     public String pintaCliente() {
         return "Cliente: " + nombre + " " + apellidos + "\n" +
                 "Usuario: " + usuario + "\n" +
@@ -172,8 +178,10 @@ public class Cliente {
                 "Correo: " + correo +  "\n";
     }
 
+    // Metodo que pinta los distintos datos de un cliente y sus pedidos
     public String pintaPedidoConCliente () {
         String salida = "";
+        // Comprobamos si el cliente ha realizado algún pedido
         if (pedidosVacios()) return "No hay pedidos todavía";
         if (pedido1 != null) {
             salida += "============   " + pedido1.getId() + "   ============\n";
@@ -190,15 +198,5 @@ public class Cliente {
         return salida;
     }
 
-    /*public String pintaAsinacionPedido () {
-        String salida = "";
-        if (pedidosVacios()) return salida;
-        salida += ((pedido1 == null) ? ""
-                :pedido1.getId() + " - " + nombre + " " + apellidos + " (" + provincia + ")  - "
-                + pedido1.cantidadProductos() + " " + pedido1.getPrecioTotal() + "E" + "\n");
-        salida += ((pedido2 == null) ? ""
-                :pedido2.getId() + " - " + nombre + " " + apellidos + " (" + provincia + ")  - "
-                + pedido2.cantidadProductos() + " " + pedido2.getPrecioTotal() + "E" + "\n");
-        return salida;
-    }*/
+
 }

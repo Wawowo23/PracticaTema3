@@ -3,6 +3,7 @@ package models;
 import java.time.LocalDate;
 
 public class Trabajador {
+    // Atributos
     private String nombre;
     private String apellidos;
     private String usuario;
@@ -14,6 +15,7 @@ public class Trabajador {
     private Pedido pedido1;
     private Pedido pedido2;
 
+    // Atributo de la clase
     private static int trabajadoresCreados = 0;
 
     // Constructor
@@ -139,20 +141,25 @@ public class Trabajador {
 
     // Metodos
 
+    // Metodo que genera automáticaente el id del trabajador
     private String generadorIdTrabajador () {
         String salida = "";
+        // Usamos el número de orden de registro de los trabajadores
         salida += (getTrabajadoresCreados() + 1);
         while (salida.length() < 3) {
             salida = "0" + salida;
         }
+        // Usamos la inicial del trabajador
         salida += getNombre().toUpperCase().charAt(0);
         return salida;
     }
 
+    // Metodo que comprueba si el usuario y contraseña introducidos corresponden a los del trabajador
     public boolean login (String usuario, String clave) {
         return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
+    // Metodo uqe comprueba el número de pedidos que tiene un trabajador asignados
     public int numeroPedidos () {
         int salida = 0;
         if (pedido1 != null) salida++;
@@ -160,14 +167,17 @@ public class Trabajador {
         return salida;
     }
 
+    // Metodo que comprueba si un trabajador ya tiene 2 pedidos asignados
     private boolean pedidosCompletos () {
         return numeroPedidos() == 2;
     }
 
+    // Metodo que comprueba si un trabajador no tiene pedidos asignados
     private boolean pedidosVacios () {
         return numeroPedidos() == 0;
     }
 
+    // Metodo por el cual un pedido es asignado a un trabajador
     public boolean insertaPedido (Pedido pedido) {
         if (pedidosCompletos()) return false;
         if (pedido1 == null) {
@@ -178,22 +188,26 @@ public class Trabajador {
         return true;
     }
 
+    // Metodo por el cual se le introduce un comentario a un pedido
     public void insertaComentarioPedido(String comentario, String idPedido) {
         if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.insertaComentario(comentario);
         if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.insertaComentario(comentario);
     }
 
+    // Metodo por el cual se cambia el estado de un pedido
     public void cambiaEstadoPedido (int op, String idPedido) {
         if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.cambiaEstado(op);
         if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.cambiaEstado(op);
 
     }
 
+    // Metodo por el cual se cambia la fecha de entrega estimada de un pedido
     public void cambiaFechaPedido (LocalDate fechaNueva, String idPedido) {
-        if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.cambiaFecha(fechaNueva);
-        if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.cambiaFecha(fechaNueva);
+        if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.cambiaFechaEstimada(fechaNueva);
+        if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.cambiaFechaEstimada(fechaNueva);
     }
 
+    // Metodo por el cual se pintan los datos de un trabajador
     public String pintaTrabajador () {
         String salida = "";
         salida += "=====  Trabajador: " + idTrabajador + "  =====" + "\n";
@@ -206,10 +220,12 @@ public class Trabajador {
         return salida;
     }
 
+    // Metodo por el cual se pintan los datos de un trabajador para el menu de asignacion de pedidos
     public String pintaTrabajadorSeleccion  () {
         return nombre + " - " + numeroPedidos() + " pedidos en proceso";
     }
 
+    // Metodo por el cual se pintan los pedidos asignados a un trabajador
     public String pintaPedidosAsignados () {
         if (pedidosVacios()) return "Aún no tienes pedidos asignados";
         String salida = "";

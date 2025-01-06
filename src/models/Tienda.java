@@ -9,7 +9,6 @@ public class Tienda {
     private Trabajador trabajador3;
     private Admin admin;
 
-    //todo preguntar a Carlos si todos los trabajadores y clientes deben empezar como null
 
     // Constructor
     public Tienda () {
@@ -75,11 +74,12 @@ public class Tienda {
     // Metodos
 
     public void mock () {
-        cliente1 = new Cliente("Carlos","Cañada","Carlos","amai@gmail.com","1234","Calle hola",122344556,"Martos","Jaen");
+        cliente1 = new Cliente("Carlos","Barroso","Carlos","carlos@gmail.com","1234","Calle hola",122344556,"Martos","Jaen");
         //cliente2 = new Cliente("Lara","Camara","Lara","lara@gmail.com","0405","Calle La Cerca",4557656,"Torredonjimeno","Jaen");
         trabajador1 = new Trabajador("Rosendo","Martos","Rosendo","1234","rosendo@gmail.com","Calle amai",898989898);
     }
 
+    // Metodo que comprueba si el usuario y la contraseña introducidas corresponden a un cliente, trabajador o al admin
     public String login (String usuario, String clave) {
         if (cliente1 != null && cliente1.login(usuario,clave)) return "cliente";
         if (cliente2 != null && cliente2.login(usuario,clave)) return "cliente";
@@ -90,6 +90,7 @@ public class Tienda {
         return "error";
     }
 
+    // Metodo que devuelve al cliente al que corresponden los datos de inicio de sesión
     public Cliente loginCliente (String usuario, String clave) {
         if (!login(usuario,clave).equals("cliente")) return null;
         if (cliente1.login(usuario,clave)) return cliente1;
@@ -97,6 +98,7 @@ public class Tienda {
         return null;
     }
 
+    // Metodo que comprueba si hay espacio libre para registrar un cliente y lo registra
     public boolean registroCliente (Cliente clienteRegistrado) {
         if (cliente1 == null) {
             cliente1 = new Cliente(clienteRegistrado);
@@ -109,6 +111,7 @@ public class Tienda {
         return false;
     }
 
+    // Metodo que comprueba si hay espacio para registrar a un trabajador y lo registra
     public boolean registroTrabajador (Trabajador trabajadorRegistrado) {
         if (trabajadoresLlenos()) return false;
         if (trabajador1 == null) {
@@ -123,16 +126,19 @@ public class Tienda {
         return true;
     }
 
+    // Metodo que comprueba si ya hay 3 trabajadores registrados
     public boolean trabajadoresLlenos () {
         return trabajador1 != null && trabajador2 != null && trabajador3 != null;
     }
 
-    public boolean registraPedido (Pedido pedido) {
-     if (admin.pedidosCompletos()) return false;
+    // Metodo que registra un pedido
+    public void registraPedido (Pedido pedido) {
+     if (admin.pedidosCompletos()) return;
      admin.registraPedido(pedido);
-     return true;
+
     }
 
+    // Metodo que devuelve al trabajador al que corresponden los datos de inicio de sesión
     public Trabajador loginTrabajador (String usuario, String clave) {
         if (!login(usuario, clave).equals("trabajador")) return null;
         if (trabajador1.login(usuario, clave)) return trabajador1;
@@ -141,11 +147,13 @@ public class Tienda {
         return null;
     }
 
+    // Metodo que devuelve al admin una vez se comprueba que los datos de inicio de sesión le corresponden
     public Admin loginAdmin (String usuario, String clave) {
         if (login(usuario, clave).equals("admin")) return admin;
         return null;
     }
 
+    // Metodo que calcula el número de trabajadores registrados
     private int numeroTrabajadores () {
         int salida = 0;
         if (trabajador1 != null) salida++;
@@ -154,6 +162,7 @@ public class Tienda {
         return salida;
     }
 
+    // Metodo que asigna automaticamnte los pedidos a los trabajadores
     public boolean asignacionAutomatica (Pedido pedido) {
         if (numeroTrabajadores() == 0) return false;
         if (numeroTrabajadores() == 1) {
@@ -169,6 +178,8 @@ public class Tienda {
                 trabajador2.insertaPedido(pedido);
                 return true;
             }
+            // Si los trabajadores tienen el mismo número de pedidos asignados
+            // el pedido introducido se tendrá que asignar manualmente
             return false;
         }
         if (numeroTrabajadores() == 3) {
@@ -190,10 +201,17 @@ public class Tienda {
 
     }
 
+    // Metodo que calcula cuantos pedidos registrados no han sido asignados todavía
     public int pedidosSinAsignar () {
-        return admin.numeroPedidos() - (trabajador1.numeroPedidos() + trabajador2.numeroPedidos() + trabajador3.numeroPedidos());
+        int salida = 0;
+        salida += admin.numeroPedidos();
+        if (trabajador1 != null) salida -= trabajador1.numeroPedidos();
+        if (trabajador2 != null) salida -= trabajador2.numeroPedidos();
+        if (trabajador3 != null) salida -= trabajador3.numeroPedidos();
+        return salida;
     }
 
+    // Metodo que pinta a los trabajadores para el menú de asignación
     public String pintaTrabajadoresParaSeleccion () {
         String salida = "";
         salida += "1.- " + ((trabajador1 == null) ? "":trabajador1.pintaTrabajadorSeleccion()) + "\n";
@@ -202,6 +220,7 @@ public class Tienda {
         return salida;
     }
 
+    // Metodo que asigna un pedido introducido a un trabajador según la opción indicada
     public boolean asignaPedidoTrabajador (int op, Pedido pedidoSeleccionado) {
         return switch (op) {
             case 1 -> trabajador1.insertaPedido(pedidoSeleccionado);
@@ -211,6 +230,7 @@ public class Tienda {
         };
     }
 
+    // Metodo que pinta los pedidos para el administrador
     public String pintaPedidosParaAdmin () {
         String salida = "";
         if (cliente1 != null && !cliente1.pedidosVacios()) salida += cliente1.pintaPedidoConCliente();
@@ -219,10 +239,12 @@ public class Tienda {
         return salida;
     }
 
+    // Metodo que comprueba si no hay clientes registrados
     private boolean clientesVacios () {
         return cliente1 == null && cliente2 == null;
     }
 
+    // Metodo que pinta los datos de los trabajadores
     public String pintaTrabajadores () {
         String salida = "";
         if (numeroTrabajadores() == 0) salida += "No hay trabajadores registrados todavía";
@@ -232,6 +254,7 @@ public class Tienda {
         return salida;
     }
 
+    // Metodo que pinta los datos de los clientes registrados
     public String pintaClientes () {
         String salida = "";
         if (clientesVacios()) salida += "No hay clientes registrados todavía";

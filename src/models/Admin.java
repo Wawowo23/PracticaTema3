@@ -3,6 +3,7 @@ package models;
 import java.time.LocalDate;
 
 public class Admin {
+    // Atributos
     private  String usuario;
     private  String clave;
     private Pedido pedido1;
@@ -10,6 +11,7 @@ public class Admin {
     private Pedido pedido3;
     private Pedido pedido4;
 
+    // Constructor
     public Admin() {
         usuario = "Wiwi";
         clave = "1234";
@@ -35,12 +37,46 @@ public class Admin {
         this.clave = clave;
     }
 
-     // Metodos
+    public Pedido getPedido1() {
+        return pedido1;
+    }
 
+    public void setPedido1(Pedido pedido1) {
+        this.pedido1 = pedido1;
+    }
+
+    public Pedido getPedido2() {
+        return pedido2;
+    }
+
+    public void setPedido2(Pedido pedido2) {
+        this.pedido2 = pedido2;
+    }
+
+    public Pedido getPedido3() {
+        return pedido3;
+    }
+
+    public void setPedido3(Pedido pedido3) {
+        this.pedido3 = pedido3;
+    }
+
+    public Pedido getPedido4() {
+        return pedido4;
+    }
+
+    public void setPedido4(Pedido pedido4) {
+        this.pedido4 = pedido4;
+    }
+
+    // Metodos
+
+    // Metodo que comprueba si el usuario y contraseña introducidos corresponden con los del admin
     public boolean login (String usuario, String clave) {
         return this.usuario.equals(usuario) && this.clave.equals(clave);
     }
 
+    // Metodo que registra un pedido dentro del perfil del admin
     public boolean registraPedido (Pedido pedido) {
         if (pedidosCompletos()) return false;
         if (pedido1 == null) {
@@ -62,6 +98,7 @@ public class Admin {
         return false;
     }
 
+    // Metodo que comprueba cuantos pedidos hay registrados
     public int numeroPedidos () {
         int salida = 0;
         if (pedido1 != null) salida++;
@@ -71,12 +108,12 @@ public class Admin {
         return salida;
     }
 
+    // Metodo que comprueba si el admin ya tiene 4 pedidos registrados
     public boolean pedidosCompletos () {
         return numeroPedidos() == 4;
     }
 
-
-
+    // Metodo que pinta los pedidos para el admin
     public String pintaEstadosPedidos () {
         String salida = "";
         if (pedido1 != null) salida += pedido1.pintaPedidoParaTrabajadorAdmin();
@@ -86,15 +123,17 @@ public class Admin {
         return salida;
     }
 
+    // Metodo que pinta los pedidos para el menú de asignación del admin
     public String pintaSeleccionPedido () {
         String salida = "";
-        salida += "1.- " + ((pedido1 == null) ? "":pedido1.pintaSeleccionado()) + "\n";
-        salida += "2.- " + ((pedido2 == null) ? "":pedido2.pintaSeleccionado()) + "\n";
-        salida += "3.- " + ((pedido3 == null) ? "":pedido3.pintaSeleccionado()) + "\n";
-        salida += "4.- " + ((pedido4 == null) ? "":pedido4.pintaSeleccionado()) + "\n";
+        salida += "1.- " + ((pedido1 == null) ? "":pedido1.pintaSeleccionadoAsignacion()) + "\n";
+        salida += "2.- " + ((pedido2 == null) ? "":pedido2.pintaSeleccionadoAsignacion()) + "\n";
+        salida += "3.- " + ((pedido3 == null) ? "":pedido3.pintaSeleccionadoAsignacion()) + "\n";
+        salida += "4.- " + ((pedido4 == null) ? "":pedido4.pintaSeleccionadoAsignacion()) + "\n";
         return salida;
     }
 
+    // Metodo que selecciona un pedido para la asignación
     public Pedido seleccionaPedido (int op) {
         return switch (op) {
             case 1 -> pedido1;
@@ -106,6 +145,7 @@ public class Admin {
 
     }
 
+    // Metodo por el cual se cambia el estado de un pedido
     public void cambiaEstadoPedido (int op, String idPedido) {
         if (pedido1 != null && idPedido.equals(pedido1.getId())) pedido1.cambiaEstado(op);
         if (pedido2 != null && idPedido.equals(pedido2.getId())) pedido2.cambiaEstado(op);
@@ -114,13 +154,15 @@ public class Admin {
 
     }
 
+    // Metodo por el cual se cambia la fecha de entrega estimada de un pedido
     public void cambiaFechaPedido (LocalDate fechaNueva, String idPedido) {
-        if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.cambiaFecha(fechaNueva);
-        if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.cambiaFecha(fechaNueva);
-        if (idPedido.equals(pedido3.getId()) && pedido3 != null) pedido3.cambiaFecha(fechaNueva);
-        if (idPedido.equals(pedido4.getId()) && pedido4 != null) pedido4.cambiaFecha(fechaNueva);
+        if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.cambiaFechaEstimada(fechaNueva);
+        if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.cambiaFechaEstimada(fechaNueva);
+        if (idPedido.equals(pedido3.getId()) && pedido3 != null) pedido3.cambiaFechaEstimada(fechaNueva);
+        if (idPedido.equals(pedido4.getId()) && pedido4 != null) pedido4.cambiaFechaEstimada(fechaNueva);
     }
 
+    // Metodo por el cual se le introduce un comentario a un pedido
     public void insertaComentarioPedido(String comentario, String idPedido) {
         if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.insertaComentario(comentario);
         if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.insertaComentario(comentario);

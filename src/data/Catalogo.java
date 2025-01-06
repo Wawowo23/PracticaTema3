@@ -2,10 +2,9 @@ package data;
 
 import models.Producto;
 
+// Aquí tenemos creados los distintos productos que están en venta
 public class Catalogo {
-    /*public static Productos lapiz () {
-        return new Productos("Lápiz", 0.25f, 50);
-    }*/
+
     public static Producto libroRecetas = new Producto("Libro de Recetas",5.75f,15);
     public static Producto libroBricolaje = new Producto("Libro de bricolaje",6.50f,17);
     public static Producto libroInformatica = new Producto("Libro de informática",8.90f,10);
@@ -15,6 +14,7 @@ public class Catalogo {
     public static Producto libroCorazonNavidad = new Producto("Un Corazón por Navidad",16.95f,20);
     public static Producto libroAkira = new Producto("Akira: Vol I",19.00f,13);
 
+    // Metodo para pintar el catálogo completo
     public static void pintaCatalogo () {
         System.out.printf("""
                 1.- %s
