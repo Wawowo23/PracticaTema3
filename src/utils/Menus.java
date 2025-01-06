@@ -85,7 +85,7 @@ public class Menus {
             System.out.print("Introduzca el número de teléfono: ");
             telefono = Integer.parseInt(s.nextLine());
             if (telefono < 100000000 || telefono > 999999999) System.out.println("El número introducido no cumple con los requisitos establecidos");
-        } while (telefono < 100000000 || telefono > 999999999);
+        } while (telefono < 100000000 || telefono > 999999999 );
         return new Trabajador(nombre,apellidos,usuario,clave,correo,direccion,telefono);
     }
 

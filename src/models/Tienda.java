@@ -190,12 +190,22 @@ public class Tienda {
 
     }
 
-    /*public String pintaAsinacionPedido () {
+    public String pintaTrabajadoresParaSeleccion () {
         String salida = "";
-        if (!cliente1.pedidosVacios()) salida += cliente1.pintaAsinacionPedido();
-        if (!cliente2.pedidosVacios()) salida += cliente2.pintaAsinacionPedido();
+        salida += "1.- " + ((trabajador1 == null) ? "":trabajador1.pintaTrabajadorSeleccion()) + "\n";
+        salida += "2.- " + ((trabajador2 == null) ? "":trabajador2.pintaTrabajadorSeleccion()) + "\n";
+        salida += "3.- " + ((trabajador3 == null) ? "":trabajador3.pintaTrabajadorSeleccion()) + "\n";
         return salida;
-    }*/
+    }
+
+    public boolean asignaPedidoTrabajador (int op, Pedido pedidoSeleccionado) {
+        return switch (op) {
+            case 1 -> trabajador1.insertaPedido(pedidoSeleccionado);
+            case 2 -> trabajador2.insertaPedido(pedidoSeleccionado);
+            case 3 -> trabajador3.insertaPedido(pedidoSeleccionado);
+            default -> false;
+        };
+    }
 
     public String pintaPedidosParaAdmin () {
         String salida = "";

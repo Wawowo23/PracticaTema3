@@ -6,6 +6,7 @@ import utils.Menus;
 import utils.Utils;
 
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class main {
@@ -125,7 +126,26 @@ public class main {
                                             String idTemp = s.nextLine();
                                             int estadoNuevo = Menus.seleccionaEstado(idTemp);
                                             trabajadorTemporal.cambiaEstadoPedido(estadoNuevo,idTemp);
+                                            System.out.println("Estado del pedido cambiado correctamente");
+                                            System.out.print("¿Quiere indicar una nueva fecha de entrega?(S/N): ");
+                                            String opCambiaFecha = s.nextLine();
+                                            if (opCambiaFecha.equalsIgnoreCase("s")) {
+                                                System.out.print("Introduzca la nueva fecha de entrega (yyyy-mm-dd): ");
+                                                LocalDate fechaNueva = LocalDate.parse(s.nextLine());
+                                                trabajadorTemporal.cambiaFechaPedido(fechaNueva,idTemp);
+                                                System.out.println("Fecha guardada correctamente");
+                                            }
+                                            System.out.println("¿Quiere añadir un comentario al pedido?(S/N)");
+                                            String opInsertaComentario = s.nextLine();
+                                            if (opInsertaComentario.equalsIgnoreCase("s")) {
+                                                System.out.print("Introduzca el nuevo comentario: ");
+                                                String comentarioNuevo = s.nextLine();
+                                                trabajadorTemporal.insertaComentarioPedido(comentarioNuevo,idTemp);
+                                                System.out.println("Comentario guardado correctamente");
+                                            }
+
                                         }
+
                                         Utils.pulsaParaContinuar();
                                         break;
                                     case "3":
@@ -170,6 +190,22 @@ public class main {
                                 opMenusUsuarios = s.nextLine();
                                 switch (opMenusUsuarios) {
                                     case "1":
+                                        Pedido pedidoSeleccionado;
+                                        System.out.println("Bienvenido al apartado de asignación de pedidos");
+                                        do {
+                                            System.out.println(adminTemporal.pintaSeleccionPedido());
+                                            System.out.print("Seleccione el pedido a asignar: ");
+                                            int opPedido = Integer.parseInt(s.nextLine());
+                                            pedidoSeleccionado = adminTemporal.seleccionaPedido(opPedido);
+                                            if (pedidoSeleccionado == null) System.out.println("El pedido que ha seleccionado no existe");
+                                        } while (pedidoSeleccionado == null);
+                                        System.out.println(tienda.pintaTrabajadoresParaSeleccion());
+                                        System.out.print("Seleccione el trabajador: ");
+                                        int opTrabajador = Integer.parseInt(s.nextLine());
+                                        System.out.println((tienda.asignaPedidoTrabajador(opTrabajador,pedidoSeleccionado)) ?
+                                                "El pedido ha sido asignado correctamente"
+                                                : "Ha ocurrido un problema al asignar el pedido");
+
                                         break;
                                     case "2":
                                         System.out.println(adminTemporal.pintaEstadosPedidos());
@@ -177,6 +213,23 @@ public class main {
                                         String idTemp = s.nextLine();
                                         int estadoNuevo = Menus.seleccionaEstado(idTemp);
                                         adminTemporal.cambiaEstadoPedido(estadoNuevo,idTemp);
+                                        System.out.println("Estado del pedido cambiado correctamente");
+                                        System.out.print("¿Quiere indicar una nueva fecha de entrega?(S/N): ");
+                                        String opCambiaFecha = s.nextLine();
+                                        if (opCambiaFecha.equalsIgnoreCase("s")) {
+                                            System.out.print("Introduzca la nueva fecha de entrega (yyyy-mm-dd): ");
+                                            LocalDate fechaNueva = LocalDate.parse(s.nextLine());
+                                            adminTemporal.cambiaFechaPedido(fechaNueva,idTemp);
+                                            System.out.println("Fecha guardada correctamente");
+                                        }
+                                        System.out.println("¿Quiere añadir un comentario al pedido?(S/N)");
+                                        String opInsertaComentario = s.nextLine();
+                                        if (opInsertaComentario.equalsIgnoreCase("s")) {
+                                            System.out.print("Introduzca el nuevo comentario: ");
+                                            String comentarioNuevo = s.nextLine();
+                                            adminTemporal.insertaComentarioPedido(comentarioNuevo,idTemp);
+                                            System.out.println("Comentario guardado correctamente");
+                                        }
                                         break;
                                     case "3":
                                         System.out.println("Bienvenido al apartado de registro de trabajadores");

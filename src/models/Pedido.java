@@ -220,8 +220,16 @@ public class Pedido {
 
     }
 
+    public void cambiaFecha(LocalDate fechaNueva) {
+        setFechaPedido(fechaNueva.minusDays(5));
+    }
+
     public void insertaComentario (String comentario) {
         this.comentario = comentario;
+    }
+
+    public String pintaSeleccionado () {
+        return id + " - " + cantidadProductos() + " producto - " + precioTotal + "E";
     }
 
     @Override
@@ -237,5 +245,6 @@ public class Pedido {
                 ", producto3=" + producto3 +
                 '}';
     }
+
 
 }

@@ -1,5 +1,7 @@
 package models;
 
+import java.time.LocalDate;
+
 public class Trabajador {
     private String nombre;
     private String apellidos;
@@ -187,6 +189,11 @@ public class Trabajador {
 
     }
 
+    public void cambiaFechaPedido (LocalDate fechaNueva, String idPedido) {
+        if (idPedido.equals(pedido1.getId()) && pedido1 != null) pedido1.cambiaFecha(fechaNueva);
+        if (idPedido.equals(pedido2.getId()) && pedido2 != null) pedido2.cambiaFecha(fechaNueva);
+    }
+
     public String pintaTrabajador () {
         String salida = "";
         salida += "=====  Trabajador: " + idTrabajador + "  =====" + "\n";
@@ -197,6 +204,10 @@ public class Trabajador {
         salida += "Dirección: " + direccion + "\n";
         salida += "Teléfono: " + telefono + "\n";
         return salida;
+    }
+
+    public String pintaTrabajadorSeleccion  () {
+        return nombre + " - " + numeroPedidos() + " pedidos en proceso";
     }
 
     public String pintaPedidosAsignados () {
