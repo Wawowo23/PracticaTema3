@@ -186,7 +186,7 @@ public class main {
                             Admin adminTemporal = tienda.loginAdmin(usuarioTemp,claveTemp);
                             do {
                                 Utils.limpiaPantalla();
-                                Menus.menuAdministrador(adminTemporal);
+                                Menus.menuAdministrador(adminTemporal,tienda);
                                 opMenusUsuarios = s.nextLine();
                                 switch (opMenusUsuarios) {
                                     case "1":
@@ -273,6 +273,7 @@ public class main {
                     }
                     break;
                 default:
+
                     System.out.println("Opción introducida incorrecta.");
                     Utils.pulsaParaContinuar();
                     break;

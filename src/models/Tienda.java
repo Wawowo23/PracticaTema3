@@ -190,6 +190,10 @@ public class Tienda {
 
     }
 
+    public int pedidosSinAsignar () {
+        return admin.numeroPedidos() - (trabajador1.numeroPedidos() + trabajador2.numeroPedidos() + trabajador3.numeroPedidos());
+    }
+
     public String pintaTrabajadoresParaSeleccion () {
         String salida = "";
         salida += "1.- " + ((trabajador1 == null) ? "":trabajador1.pintaTrabajadorSeleccion()) + "\n";

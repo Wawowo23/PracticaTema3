@@ -157,11 +157,11 @@ public class Menus {
                 Introduzca la opción a realizar:\s""",trabajador.getNombre(),trabajador.numeroPedidos());
     }
 
-    public static void menuAdministrador(Admin admin){
+    public static void menuAdministrador(Admin admin, Tienda tienda){
         System.out.printf("""
                                    FERNANSHOP
                 ==================================================
-                = Bienvenido %s. Tienes %s pedido por asignar    =
+                = Bienvenido %s. Tienes %d pedido por asignar    =
                 ==================================================
                 1. Asignar un pedido a un trabajador
                 2. Modificar el estado de un pedido
@@ -170,7 +170,7 @@ public class Menus {
                 5. Ver todos los clientes
                 6. Ver todos los trabajadores
                 7. Cerrar sesión
-                Introduzca la opción a realizar:\s""",admin.getUsuario(),admin.numeroPedidos());
+                Introduzca la opción a realizar:\s""",admin.getUsuario(),tienda.pedidosSinAsignar());
     }
 
     public static Producto seleccionaProducto () {
