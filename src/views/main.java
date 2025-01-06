@@ -76,7 +76,7 @@ public class main {
                                             } while (!quiereSeguir.equalsIgnoreCase("n") && !pedidoAgregado.pedidoLleno());
                                             clienteTemporal.insertaPedidos(pedidoAgregado);
                                             tienda.registraPedido(pedidoAgregado);
-
+                                            tienda.asignacionAutomatica(pedidoAgregado);
                                             Utils.pulsaParaContinuar();
                                         }
                                         break;
