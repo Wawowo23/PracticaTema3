@@ -41,12 +41,13 @@ A continuación te explicaré como funciona el software y sobretodo sus principa
 Una vez dentro del menú del cliente pasaremos a explicar las diferentes opciones de dicho menú
   * En la primera opción tendremos la consulta del catálogo de productos en la que podremos ver que productos tiene la tienda:
 ![Captura de pantalla 2025-01-07 153110](https://github.com/user-attachments/assets/87e98ea9-9c83-41ef-b7f6-d952f2824993)
+
   * En la segunda opción podremos realizar un pedido, cabe decir que el máximo de productos que el cliente puede escoger son 3 y el máximo de pedidos que puede hacer son 2:
     
 ![Captura de pantalla 2025-01-07 153628](https://github.com/user-attachments/assets/66a413c0-1788-4364-9f74-770ec8527e03)
 ![Captura de pantalla 2025-01-07 153701](https://github.com/user-attachments/assets/e6c701a9-5d89-4709-84ef-1cdefe0efb09)
 
-    * Deberemos seleccionar el producto que deseemos y la cantidad. A continuación nos preguntará si deseamos introducir otro producto al pedido (S/N), deberemos introducir "S" en el caso de que si y "N" en el caso de que no:
+   * Deberemos seleccionar el producto que deseemos y la cantidad. A continuación nos preguntará si deseamos introducir otro producto al pedido (S/N), deberemos introducir "S" en el caso de que si y "N" en el caso de que no:
 ![Captura de pantalla 2025-01-07 153541](https://github.com/user-attachments/assets/ab846a86-604c-41d1-a70d-ba89a57cfdf1)
 
   * En la opción 3 podremos ver los pedidos que hemos realizado, en el que saldrá el código del pedido, después nuestros datos personales, tendremos también la fecha del pedido, la fecha de entrega estimada y por último lo que hemos pedido junto al precio final:
