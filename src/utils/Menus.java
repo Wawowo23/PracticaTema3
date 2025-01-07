@@ -6,6 +6,8 @@ import models.*;
 import java.util.Scanner;
 
 public class Menus {
+
+    // Metodo que pinta el logo de la empresa
     public static void inicio () {
 
         System.out.println("""
@@ -20,6 +22,7 @@ public class Menus {
 
     }
 
+    // Metodo que pinta el menu del cliente
     public static void menuCliente (Cliente cliente) {
         System.out.printf("""
                 FERNANSHOP
@@ -33,6 +36,7 @@ public class Menus {
                 Introduzca la opción deseada:\s""",cliente.getUsuario());
     }
 
+    // Metodo que devuelve un cliente tras reunir sus datos de registro
     public static Cliente menuRegistro () {
         var s = new Scanner(System.in);
         String nombre, apellidos, usuario, correo, clave, direccion, localidad, provincia;
@@ -48,15 +52,18 @@ public class Menus {
         nombre = s.nextLine();
         System.out.print("Introduzca su apellido: ");
         apellidos = s.nextLine();
-        System.out.print("Introduzca su correo: ");
-        correo = s.nextLine();
+        do { // Bucle que comprueba que el correo contenga un @
+            System.out.print("Introduzca su correo: ");
+            correo = s.nextLine();
+            if (!correo.contains("@")) System.out.println("El correo introducido no cumple los requisitos");
+        } while (!correo.contains("@"));
         System.out.print("Introduzca su dirección: ");
         direccion = s.nextLine();
         System.out.print("Introduzca su provincia: ");
         provincia = s.nextLine();
         System.out.print("Introduzca su localidad: ");
         localidad = s.nextLine();
-        do {
+        do { //Bucle que comprueba que el teléfono tiene 9 dígitos
             System.out.print("Introduzca su número de teléfono: ");
             telefono = Integer.parseInt(s.nextLine());
             if (telefono < 100000000 || telefono > 999999999) System.out.println("El número introducido no cumple con los requisitos establecidos");
@@ -65,6 +72,7 @@ public class Menus {
 
     }
 
+    // Metodo que devuelve un trabajador tras reunir los datos necesarios para darlo de alta
     public static Trabajador registroTrabajador () {
         var s = new Scanner(System.in);
         String usuario,clave,nombre,apellidos,correo,direccion;
@@ -77,8 +85,11 @@ public class Menus {
         nombre = s.nextLine();
         System.out.print("Introduzca los apellidos: ");
         apellidos = s.nextLine();
-        System.out.print("Introduzca el correo electrónico: ");
-        correo = s.nextLine();
+        do {
+            System.out.print("Introduzca su correo: ");
+            correo = s.nextLine();
+            if (!correo.contains("@")) System.out.println("El correo introducido no cumple los requisitos");
+        } while (!correo.contains("@"));
         System.out.print("Introduzca la dirección: ");
         direccion = s.nextLine();
         do {
@@ -89,6 +100,7 @@ public class Menus {
         return new Trabajador(nombre,apellidos,usuario,clave,correo,direccion,telefono);
     }
 
+    // Metodo que se encarga de cambiar un dato personal del cliente que sea introducido
     public static void cambiaDato (Cliente clienteTemporal, String datoCambiado) {
         var s = new Scanner(System.in);
         switch (datoCambiado.toLowerCase()) {
@@ -140,6 +152,7 @@ public class Menus {
         }
     }
 
+    // Metodo que pinta el menú de trabajador
     public static void menuTrabajador(Trabajador trabajador){
 
         System.out.printf("""
@@ -157,6 +170,7 @@ public class Menus {
                 Introduzca la opción a realizar:\s""",trabajador.getNombre(),trabajador.numeroPedidos());
     }
 
+    // Metodo que pinta el menú de administrador
     public static void menuAdministrador(Admin admin, Tienda tienda){
         System.out.printf("""
                                    FERNANSHOP
@@ -173,11 +187,12 @@ public class Menus {
                 Introduzca la opción a realizar:\s""",admin.getUsuario(),tienda.pedidosSinAsignar());
     }
 
+    // Metodo que devuelve un producto que haya sido seleccionado del catálogo
     public static Producto seleccionaProducto () {
         var s = new Scanner(System.in);
         int op;
         Catalogo.pintaCatalogo();
-        do {
+        do { // Bucle que se asegura de que se seleccione un producto que existe
             System.out.print("Introduce el producto que quieres seleccionar: ");
             op = Integer.parseInt(s.nextLine());
             if (op < 1 || op > 8) System.out.println("El producto seleccionado no existe");
@@ -200,6 +215,7 @@ public class Menus {
         return null;
     }
 
+    // Metodo que se utiliza para cambiar los datos de un producto
     public static void cambioProducto () {
         var s = new Scanner(System.in);
         Producto productoCambio = seleccionaProducto();
@@ -212,7 +228,7 @@ public class Menus {
                 break;
             case "precio":
                 float nuevoPrecio;
-                do {
+                do { // Comprobamos que el nuevo precio introducido no sea menor de 0
                     System.out.print("Introduce el nuevo precio para el producto: ");
                     nuevoPrecio = Float.parseFloat(s.nextLine());
                     if (nuevoPrecio < 0) System.out.println("No se puede cambiar el precio establecido al introducido");
@@ -221,7 +237,7 @@ public class Menus {
                 break;
             case "cantidad":
                 int cantidadNueva;
-                do {
+                do { // Comprobamos que la nueva cantidad introducida no sea menor de 0
                     System.out.print("Introduce la nueva cantidad para el producto: ");
                     cantidadNueva = Integer.parseInt(s.nextLine());
                     if (cantidadNueva < 0) System.out.println("No se puede cambiar la cantidad a la introducida");
@@ -235,6 +251,7 @@ public class Menus {
 
     }
 
+    // Metodo que muestra los distintos estados que se le pueden dar a un pedido y devuelve una de las opciones
     public static int seleccionaEstado (String id) {
         var s = new Scanner(System.in);
         int opcion;
@@ -253,6 +270,7 @@ public class Menus {
         return opcion;
     }
 
+    // Metodo que se encarga de cambiar un dato personal del trabajador que sea introducido
     public static void cambiaDatoTrabajador(Trabajador trabajadorTemporal, String datoCambiado) {
         var s = new Scanner(System.in);
         switch (datoCambiado.toLowerCase()) {
