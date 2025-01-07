@@ -57,6 +57,7 @@ Una vez dentro del menú del cliente pasaremos a explicar las diferentes opcione
   ![Captura de pantalla 2025-01-07 154053](https://github.com/user-attachments/assets/6c43faca-74d8-438e-a593-2f9f98c439a1)
 
   * En la opción 5 podremos modificar nuestros datos personales solamente poniendo lo que queremos cambiar (nombre/dirección/teléfono...):
+    
 ![Captura de pantalla 2025-01-07 154234](https://github.com/user-attachments/assets/c3dfbdbd-29d4-4a34-bd9b-6d890cf24129)
 ![Captura de pantalla 2025-01-07 154335](https://github.com/user-attachments/assets/fdbbd4b1-b0fc-4abd-9362-d6521b67643c)
 ![Captura de pantalla 2025-01-07 154415](https://github.com/user-attachments/assets/811b786a-ba0c-4678-b5dd-768b9cefde1c)
