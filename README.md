@@ -34,7 +34,7 @@ A continuación te explicaré como funciona el software y sobretodo sus principa
     * Los trabajadores podrán iniciar sesión con su usuario y su clave siempre cuando hayan sido dado de alta por el administrador. Además, el administrador ya tendrá su usuario y su clave y podrá iniciar sesión de manera normal.
   ## 1º Caso ( Un cliente se ha registrado y va a iniciar sesión ):
   * Una vez el cliente se ha registrado podrá poner su usuario y su contraseña con normalidad y accederá al menú del cliente:
-  * 
+    
 ![Captura de pantalla 2025-01-07 152902](https://github.com/user-attachments/assets/538e2a16-a4d2-4126-92a8-d476d8fd409c)
 ![Captura de pantalla 2025-01-07 152855](https://github.com/user-attachments/assets/c2f16cc2-782d-4c10-a90a-712e8895087e)
 
