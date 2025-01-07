@@ -71,6 +71,7 @@ Una vez dentro del menú del cliente pasaremos a explicar las diferentes opcione
 
 ## 2º Caso: Esta vez explicaremos antes de los trabajadores el del administrador debido a que es el propio administrador el que da de alta a los trabajadores. El administrador cuenta con su propio usuario y su clave:
   * Al introducir el administrador su clave y su usuario podrá acceder al menú de administrador:
+    
 ![Captura de pantalla 2025-01-07 155626](https://github.com/user-attachments/assets/8a93a645-da47-455a-9333-b842920de23f)
 ![Captura de pantalla 2025-01-07 155636](https://github.com/user-attachments/assets/8f7476c9-f69b-499a-a4d9-5bb4b30a12ce)
 
